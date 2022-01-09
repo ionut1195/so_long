@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   xmap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:24:37 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/09 20:13:28 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/09 13:44:15 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,75 +139,40 @@ int	get_map_and_validate(t_vars *vars, char *argv[])
 	return (0);
 }
 
-void	init_images(t_vars *vars)
+int	print_map(t_vars vars, t_vars *v)
 {
-	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, "./img/brick_wall.xpm",
-			&vars->wall.img_h, &vars->wall.img_w);
-	vars->floor.img = mlx_xpm_file_to_image(vars->mlx, "./img/floor.xpm",
-			&vars->floor.img_h, &vars->floor.img_w);
-	vars->player.img = mlx_xpm_file_to_image(vars->mlx, "./img/courage.xpm",
-			&vars->player.img_h, &vars->player.img_w);
-	vars->exit.img = mlx_xpm_file_to_image(vars->mlx, "./img/exit.xpm",
-			&vars->exit.img_h, &vars->exit.img_w);
-	vars->food.img = mlx_xpm_file_to_image(vars->mlx, "./img/food.xpm",
-			&vars->food.img_h, &vars->food.img_w);
-}
-
-void	init_player(t_vars *v)
-{
-	int	r;
-	int	c;
-
-	r = 0;
-
-	while (v->map.map[r])
-	{
-		c = 0;
-		while (v->map.map[r][c])
-		{
-			if (v->map.map[r][c] == 'P')
-			{
-				v->p_r = r;
-				v->p_c = c;
-			}
-			c++;
-		}
-		r++;
-	}
-}
-
-void	print_element(char elem, t_vars *vars, int col, int row)
-{
-	if (elem == '1')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall.img, (col * 50), (row * 50));
-	else if (elem == '0')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->floor.img, (col * 50), (row * 50));
-	else if (elem == 'E')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->exit.img, (col * 50), (row * 50));
-	else if (elem == 'C')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->food.img, (col * 50), (row * 50));
-	else if (elem == 'P')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, (col * 50), (row * 50));
-}
-
-int	print_map(t_vars *vars)
-{
-	int		col;
-	int		row;
-	char	elem;
+	int	col;
+	int	row;
 
 	row = 0;
-	while (vars->map.map[row] != NULL)
+	while (vars.map.map[row] != NULL)
 	{
 		col = 0;
-		
-		while (vars->map.map[row][col] != '\n' && vars->map.map[row][col] != '\0')
+		while (vars.map.map[row][col] != '\n' && vars.map.map[row][col] != '\0')
 		{
-			elem = vars->map.map[row][col];
-			print_element(elem, vars, col, row);
-			col++;
+			if (vars.map.map[row][col] == '1')
+			{
+				print_wall(vars, row, col);
+				col++;
+			}
+			else
+			{
+				print_floor(vars, row, col);
+				if (vars.map.map[row][col] == 'P')
+				{
+					print_player(vars, row, col);
+					v->py = row;
+					v->px = col;
+				}
+				else if (vars.map.map[row][col] == 'C')
+					print_collectible(vars, row, col);
+				else if (vars.map.map[row][col] == 'E')
+					print_exit(vars, row, col);
+				col++;
+			}
 		}
 		row++;
 	}
-	return (0);
+
+	return (1);
 }

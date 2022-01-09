@@ -1,8 +1,8 @@
 NAME = so_long
 SRCS = so_long.c map.c
 CC = gcc
-CFLAGS = -g# -Wall -Wextra -Werror
-MLXFLAGS = -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -lz
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+MLXFLAGS = mlx/libmlx.a -L/usr/X11/lib -I/opt/X11/include -lXext -lX11 -lm -lz -g -o
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
