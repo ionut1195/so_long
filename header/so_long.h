@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xso_long.h                                         :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 15:43:48 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/09 13:44:08 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/11 21:09:37 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "libft/libft.h"
-# include "mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
-	char	*addr;
 	int		img_w;
 	int		img_h;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 }				t_data;
 
 typedef struct s_map
@@ -34,34 +30,54 @@ typedef struct s_map
 	char	**map;
 	int		row_len;
 	int		rows;
+	int		to_collect;
+	int		collected;
 }				t_map;
 
-typedef struct	s_vars {
+typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	t_data	wall;
 	t_data	floor;
-	t_data	food;
 	t_data	player;
+	t_data	food;
 	t_data	exit;
 	t_map	map;
-	int		px;
-	int		py;
+	int		p_r;
+	int		p_c;
+	int		moves;
 }				t_vars;
 
-int		get_map_and_validate(t_vars *vars, char *argv[]);
-int		print_map(t_vars vars, t_vars *v);
+// so_long.c
+void	move_player(t_vars *v, char c);
+void	looping(t_vars vars);
+int		check_extension(char *file);
+
+// map.c
 int		get_nr_lines(char *argv[]);
-void	init_images(t_vars vars);
+int		is_rectangle(t_vars v);
+int		get_map_and_validate(t_vars *vars, char *argv[]);
+void	print_element(char elem, t_vars *vars, int col, int row);
+int		print_map(t_vars *vars);
+
+// handlers.c
+int		handle_keypress(int keysym, t_vars *vars);
+int		handle_btnrealease(t_vars *v);
+
+// inits.c
+void	init_images(t_vars *vars);
+void	init_plr_col(t_vars *v);
+void	init_v(t_vars *v);
+
+// validate.c
+int		valid_move(t_vars *v, char dir);
+int		check_first_last(char *row, int c_r, int t_r);
 int		valid_walls(char *mtx[]);
-int		check_first_last(char *row);
-int		has_p_e_c(char *mtx[], int rows);
 void	is_pec(char chr, int *p, int *e, int *c);
-void	print_player(t_vars vars, int row, int col);
-void	print_collectible(t_vars vars, int row, int col);
-void	print_wall(t_vars vars, int row, int col);
-void	print_floor(t_vars vars, int row, int col);
-void	print_exit(t_vars vars, int row, int col);
-void	move_player(t_vars vars);
-//void	loop(t_vars vars);
+int		has_p_e_c(char *mtx[], int rows);
+
+// exit.c
+
+void	ft_close(t_vars vars);
+int		ft_exit(t_vars *v);
 #endif

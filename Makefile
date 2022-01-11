@@ -1,5 +1,5 @@
 NAME = so_long
-SRCS = so_long.c map.c
+SRCS = ./sources/so_long.c ./sources/map.c ./sources/exit.c ./sources/handlers.c ./sources/inits.c ./sources/validate.c
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 MLXFLAGS = mlx/libmlx.a -L/usr/X11/lib -I/opt/X11/include -lXext -lX11 -lm -lz -g -o
