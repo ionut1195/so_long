@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:40:09 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/11 21:11:10 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:52:00 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	init_images(t_vars *vars)
 {
-	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, "./img/brick_wall.xpm",
+	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, "./img/wall.xpm",
 			&vars->wall.img_h, &vars->wall.img_w);
 	vars->floor.img = mlx_xpm_file_to_image(vars->mlx, "./img/floor.xpm",
 			&vars->floor.img_h, &vars->floor.img_w);
-	vars->player.img = mlx_xpm_file_to_image(vars->mlx, "./img/courage.xpm",
+	vars->player.img = mlx_xpm_file_to_image(vars->mlx, "./img/vampire.xpm",
 			&vars->player.img_h, &vars->player.img_w);
 	vars->exit.img = mlx_xpm_file_to_image(vars->mlx, "./img/exit.xpm",
 			&vars->exit.img_h, &vars->exit.img_w);

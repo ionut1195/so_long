@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:24:37 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/11 21:11:12 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:33:21 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	get_nr_lines(char *argv[])
 
 int	is_rectangle(t_vars v)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 1;
 	while (i < v.map.rows)
@@ -53,7 +53,7 @@ int	is_rectangle(t_vars v)
 			return (0);
 		i++;
 	}
-	return (1);	
+	return (1);
 }
 
 int	get_map_and_validate(t_vars *vars, char *argv[])
@@ -64,16 +64,17 @@ int	get_map_and_validate(t_vars *vars, char *argv[])
 	lines = get_nr_lines(argv);
 	vars->map.rows = 0;
 	map_fd = open(argv[1], O_RDONLY);
+	if (map_fd < 0)
+		return (0);
 	vars->map.map = (char **)malloc((lines + 1) * sizeof(char **));
-	if (map_fd)
-		while (ft_gnl(map_fd, &vars->map.map[vars->map.rows]))
-			vars->map.rows++;
+	while (ft_gnl(map_fd, &vars->map.map[vars->map.rows]))
+		vars->map.rows++;
 	vars->map.rows++;
 	vars->map.row_len = ft_strlen(vars->map.map[0]) - 1;
 	vars->map.map[vars->map.rows] = NULL;
 	close(map_fd);
 	if (valid_walls(vars->map.map) && has_p_e_c(vars->map.map, vars->map.rows)
-	&& is_rectangle(*vars))
+		&& is_rectangle(*vars) && valid_char(vars->map.map, vars->map.rows))
 		return (1);
 	return (0);
 }
@@ -82,27 +83,19 @@ void	print_element(char elem, t_vars *vars, int col, int row)
 {
 	if (elem == '1')
 		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->wall.img, (col * 50), (row * 50));
+			vars->wall.img, (col * 60), (row * 60));
 	else if (elem == '0')
 		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->floor.img, (col * 50), (row * 50));
+			vars->floor.img, (col * 60), (row * 60));
 	else if (elem == 'E')
 		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->exit.img, (col * 50), (row * 50));
+			vars->exit.img, (col * 60), (row * 60));
 	else if (elem == 'C')
-	{
 		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->floor.img, (col * 50), (row * 50));
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->food.img, (col * 50), (row * 50));
-	}
+			vars->food.img, (col * 60), (row * 60));
 	else if (elem == 'P')
-	{
 		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->floor.img, (col * 50), (row * 50));
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->player.img, (col * 50), (row * 50));
-	}
+			vars->player.img, (col * 60), (row * 60));
 }
 
 int	print_map(t_vars *vars)

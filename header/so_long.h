@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 15:43:48 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/11 21:09:37 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:31:54 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_vars {
 void	move_player(t_vars *v, char c);
 void	looping(t_vars vars);
 int		check_extension(char *file);
+int		valid_char(char *mtx[], int rows);
 
 // map.c
 int		get_nr_lines(char *argv[]);
