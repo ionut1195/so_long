@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:40:09 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/12 18:52:00 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:26:12 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ void	init_v(t_vars *v)
 	v->moves = 0;
 	v->map.to_collect = 0;
 	v->map.collected = 0;
+}
+
+void	count_moves(t_vars *v, char c)
+{
+	if (c == 'w' || c == 'a' || c == 's' || c == 'd')
+	{
+		v->moves++;
+		printf("Moves: %d\n", v->moves);
+	}
 }

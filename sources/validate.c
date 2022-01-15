@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:32:48 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/13 13:39:00 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:56:49 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	check_first_last(char *row, int c_r, int t_r)
 int	valid_walls(char *mtx[])
 {
 	int	rows;
-	int	col;
 	int	itr;
 
 	itr = 0;
@@ -63,7 +62,6 @@ int	valid_walls(char *mtx[])
 		rows++;
 	while (itr < rows)
 	{
-		col = 0;
 		if ((itr == 0) || (itr == rows - 1))
 		{
 			if (!check_first_last(mtx[itr], itr, rows))

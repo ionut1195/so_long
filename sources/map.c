@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:24:37 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/13 13:33:21 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:56:08 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	get_nr_lines(char *argv[])
 {
 	char	*line;
-	int		itr;
 	int		fd;
 	int		n;
 
-	itr = 0;
 	n = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)

@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:13:59 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/13 13:39:31 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:18:22 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	move_player(t_vars *v, char c)
 {
 	if (!valid_move(v, c))
 		return ;
-	if (c == 'w')
+	else if (c == 'w')
 	{
 		v->map.map[v->p_r][v->p_c] = '0';
 		v->p_r -= 1;
@@ -58,9 +58,9 @@ void	move_player(t_vars *v, char c)
 		v->map.map[v->p_r][v->p_c] = '0';
 		v->p_c += 1;
 	}
-	ft_exit(v);
-	v->map.map[v->p_r][v->p_c] = 'P';
-	v->moves++;
+	if (ft_exit(v))
+		v->map.map[v->p_r][v->p_c] = 'P';
+	count_moves(v, c);
 }
 
 void	looping(t_vars vars)
@@ -106,7 +106,7 @@ int	main(int argc, char *argv[])
 	if (valid)
 	{
 		vars.win = mlx_new_window(vars.mlx, vars.map.row_len
-				* 60, vars.map.rows * 60, "Run baby, run!");
+				* 60, vars.map.rows * 60, "Dracula's hunting session");
 		init_images(&vars);
 		init_plr_col(&vars);
 		looping(vars);

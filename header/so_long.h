@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 15:43:48 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/13 13:31:54 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:18:27 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		handle_btnrealease(t_vars *v);
 void	init_images(t_vars *vars);
 void	init_plr_col(t_vars *v);
 void	init_v(t_vars *v);
+void	count_moves(t_vars *v, char c);
 
 // validate.c
 int		valid_move(t_vars *v, char dir);

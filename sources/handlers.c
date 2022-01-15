@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:38:01 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/12 18:51:58 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:19:49 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	handle_keypress(int keysym, t_vars *vars)
 		vars->win = NULL;
 	}
 	else
-	{
 		move_player(vars, keysym);
-	}
-	printf("Moves: %d\n", vars->moves);
 	return (0);
 }
 
