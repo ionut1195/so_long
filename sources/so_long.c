@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:13:59 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/15 10:18:22 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/18 07:41:25 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	looping(t_vars vars)
 		mlx_loop_hook(vars.mlx, &print_map, &vars);
 		mlx_hook(vars.win, 2, 1L << 0, &handle_keypress, &vars);
 		mlx_hook(vars.win, 33, 1L << 5, &handle_btnrealease, &vars);
-		mlx_loop(vars.mlx);
+		if (vars.win && vars.mlx)
+			mlx_loop(vars.mlx);
 	}
 }
 
@@ -110,9 +111,8 @@ int	main(int argc, char *argv[])
 		init_images(&vars);
 		init_plr_col(&vars);
 		looping(vars);
-		ft_close(vars);
-		if (vars.map.map)
-			free(vars.map.map);
+		ft_close(&vars);
+		free_map(vars.map.map);
 		return (0);
 	}
 	else

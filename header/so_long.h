@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 15:43:48 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/15 10:18:27 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/18 07:36:01 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		has_p_e_c(char *mtx[], int rows);
 
 // exit.c
 
-void	ft_close(t_vars vars);
+void	ft_close(t_vars *vars);
 int		ft_exit(t_vars *v);
+void	free_map(char *map[]);
 #endif

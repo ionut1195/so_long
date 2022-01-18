@@ -6,7 +6,7 @@
 /*   By: itomescu <itomescu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:24:37 by itomescu          #+#    #+#             */
-/*   Updated: 2022/01/14 13:56:08 by itomescu         ###   ########.fr       */
+/*   Updated: 2022/01/18 07:41:24 by itomescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	get_map_and_validate(t_vars *vars, char *argv[])
 	if (valid_walls(vars->map.map) && has_p_e_c(vars->map.map, vars->map.rows)
 		&& is_rectangle(*vars) && valid_char(vars->map.map, vars->map.rows))
 		return (1);
+	free(vars->mlx);
+	free_map(vars->map.map);
 	return (0);
 }
 
